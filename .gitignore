@@ -1,5 +1,6 @@
 .gitignore
 .gitattributes
+.eslintrc.json
 
 config.json
 /node_modules
