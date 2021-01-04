@@ -35,15 +35,20 @@ client.once( 'ready', () => {
 });
 
 client.on( 'message', async message => {
+
+  // Stop execution if sended by bot or without prefix
   if ( !message.content.startsWith( prefix ) || message.author.bot ) return;
 
+  // Extract commandName and Arguments from the message 
   const args = message.content.slice( prefix.length ).trim().split( / +/ );
   const commandName = args.shift().toLowerCase();
 
+  // Check if commandName exist
   const command = client.commands.get( commandName )
        || client.commands.find( cmd => cmd.aliases && cmd.aliases.includes( commandName ));
   if ( !command ) return;
 
+  // START args Verification
   if ( command.args && !args.length ) {
     let reply = `You didn't provide any arguments, ${message.author}!`;
     if ( command.usage ) {
@@ -51,17 +56,23 @@ client.on( 'message', async message => {
     }
     return message.channel.send( reply );
   }
+  // END args Verification
 
+  // START mod Verification
   if ( command.guildOnly && message.channel.type === 'dm' ) {
     return message.reply( 'I can\'t execute that command inside DMs!' );
   }
+  // END mod Verification
 
+  // START mod Verification
   if ( command.requireMod ) {
     if ( !( message.member.roles.cache.find( r => r.id === modID ))) {
       return message.reply( 'Vous n\'avez pas les droits pour exécuter cette commande' );
     }
   }
+  // END mod Verification
 
+  // START Cooldown Verification
   if ( !cooldowns.has( command.name )) {
     cooldowns.set( command.name, new Discord.Collection());
   }
@@ -78,6 +89,7 @@ client.on( 'message', async message => {
       return message.reply( `please wait ${timeLeft.toFixed( 1 )} more second(s) before reusing the \`${command.name}\` command.` );
     }
   }
+  // END Cooldown Verification
 
   try {
     command.execute( message, args );
