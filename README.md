@@ -28,6 +28,8 @@ Now you can verify if the env config containe `"node": true` and you can config 
 Depending on your chisen setup and style guide, you may get syntax error.
 - You can find [my config file here](https://gist.github.com/khoeos/860b455ffb84ccf4788f7ac7321d1a00), based on AirBnB Style Guide 
 
+If you use VsCode, you can install the ESLint extension to have all the error dispayed or use the command `npx eslint FILENAME.js` to verify a file
+
 
 ## How to run the app
 
