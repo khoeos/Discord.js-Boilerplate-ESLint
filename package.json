@@ -1,12 +1,17 @@
 {
   "name": "discord.js-bot",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "A simple discord.js bot boilerplate with command Handling",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "keywords": [],
+  "keywords": ["discord.js", "bot", "discord", "boilerplate", "ESLint", "Command handler", "javascript"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khoeos/Discord.js-Boilerplate-ESLint"
+  },
   "author": "Khoeos",
   "license": "ISC",
   "dependencies": {
